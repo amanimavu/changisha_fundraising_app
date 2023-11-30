@@ -7,6 +7,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// If any modifications are made, run pmpm dlx prisma generate
+// this generates a modified prisma client that reflects the mofied prisma schema
+
 // Make sure model and field names adhere to Prisma naming convention
 // For more information: https://www.prisma.io/docs/reference/api-reference/prisma-schema-reference#model
 
