@@ -8,5 +8,6 @@
   "prettier.semi": true,
   "prettier.trailingComma": "none",
   "prettier.bracketSpacing": true,
-  "prettier.singleAttributePerLine": true
+  "prettier.singleAttributePerLine": true,
+  "prettier.tabWidth": 4
 }
