@@ -9,5 +9,5 @@ See the documentation for all the connection string options: [Connection Strings
 -   Percent-encoding is a mechanism to encode 8-bit characters that have specific meanings in the context of URLs.
 -   It is sometimes called URL encoding
 -   Special characters needing encoding are:
--   ':', '/', '?', '#', '[', ']', '@', '!', '$', '&', "'", '(', ')', '*', '+', ',', ';', '=', '%'
-i.e my$q1-23 => my%24q1-23
+-   ':', '/', '?', '#', '[', ']', '@', '!', '$', '&', "'", '(', ')', '\*', '+', ',', ';', '=', '%'
+-   i.e my$q1-23 => my%24q1-23
