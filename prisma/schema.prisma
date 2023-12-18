@@ -25,7 +25,7 @@ model CampaignCategoryBridge {
   categories Category @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "campaign_category_bridge_ibfk_2")
 
   @@id([campaignId, categoryId])
-  @@index([categoryId], map: "categoryId")
+  @@index([categoryId], map: "category_id")
   @@map("campaign_category_bridge")
 }
 
@@ -36,7 +36,7 @@ model CampaignDonationHistoryBridge {
   donationHistories DonationHistory @relation(fields: [donationHistoryId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "campaign_donation_history_bridge_ibfk_2")
 
   @@id([campaignId, donationHistoryId])
-  @@index([donationHistoryId], map: "donationHistoryId")
+  @@index([donationHistoryId], map: "donation_history_id")
   @@map("campaign_donation_history_bridge")
 }
 
@@ -74,8 +74,8 @@ model Campaign {
   campaignTypes                 CampaignType                    @relation(fields: [campaignTypeId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "campaigns_ibfk_1")
   metrics                       Metric                          @relation(fields: [metricId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "campaigns_ibfk_2")
 
-  @@index([campaignTypeId], map: "campaignTypeId")
-  @@index([metricId], map: "metricId")
+  @@index([campaignTypeId], map: "campaign_type_id")
+  @@index([metricId], map: "metric_id")
   @@map("campaigns")
 }
 
@@ -120,7 +120,7 @@ model Fundraiser {
   updatedAt      DateTime? @default(now()) @updatedAt @map("updated_at") @db.Timestamp(0)
   users          User      @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fundraisers_ibfk_1")
 
-  @@index([userId], map: "userId")
+  @@index([userId], map: "user_id")
   @@map("fundraisers")
 }
 
