@@ -106,7 +106,7 @@ model Donor {
   updatedAt DateTime? @updatedAt @map("updated_at") @db.DateTime(0)
   users     User      @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "donors_ibfk_1")
 
-  @@index([userId], map: "userId")
+  @@index([userId], map: "user_id")
   @@map("donors")
 }
 
