@@ -3,7 +3,8 @@
         "src/**/*",
         ".next/types/**/*.ts",
         "next-env.d.ts",
-        "lib/prisma.ts"
+        "lib/prisma.ts",
+        "jest.config.ts"
     ],
     "compilerOptions": {
         "baseUrl": ".",
