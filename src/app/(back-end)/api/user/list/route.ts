@@ -14,7 +14,7 @@ export async function GET(): Promise<NextResponse> {
     let users: User[] = [];
     try {
         await prisma.$connect();
-        users = await prisma.user.findMany();
+        users = await prisma.user.findMany({ include: { donors: true } });
     } catch (error) {
         console.error(error);
     } finally {
