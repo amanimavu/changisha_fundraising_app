@@ -13,7 +13,7 @@ import prisma from "@/lib/prisma";
  * @returns {Promise<NextResponse>} - Promise of a HTTP response
  */
 
-export async function POST(request: NextRequest): Promise<NextResponse> {
+export async function POST(request: NextRequest) {
     let result: Prisma.UserCreateInput | object = {};
     try {
         //JSON.parse is used to convert JSON string to a JS object
