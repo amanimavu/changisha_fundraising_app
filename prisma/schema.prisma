@@ -104,7 +104,7 @@ model Donor {
   userId    Int       @map("user_id")
   createdAt DateTime? @default(now()) @map("created_at") @db.Timestamp(0)
   updatedAt DateTime? @updatedAt @map("updated_at") @db.DateTime(0)
-  users     User      @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "donors_ibfk_1")
+  users     User      @relation(fields: [userId], references: [id], onDelete: Cascade, map: "donors_ibfk_1")
 
   @@index([userId], map: "user_id")
   @@map("donors")
@@ -118,7 +118,7 @@ model Fundraiser {
   idNumber       Int?      @map("id_number") @db.MediumInt
   createdAt      DateTime? @default(now()) @map("created_at") @db.Timestamp(0)
   updatedAt      DateTime? @default(now()) @updatedAt @map("updated_at") @db.Timestamp(0)
-  users          User      @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fundraisers_ibfk_1")
+  users          User      @relation(fields: [userId], references: [id], onDelete: Cascade, map: "fundraisers_ibfk_1")
 
   @@index([userId], map: "user_id")
   @@map("fundraisers")
