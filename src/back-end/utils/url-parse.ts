@@ -1,16 +1,26 @@
+/**
+ * Extract the id from the URL with the id
+ * placed as the lat path parameter
+ *
+ * @summary extract id from the URL
+ * @param url
+ * @returns {number| null}
+ */
 export const getIdFromUrl = (url: string): number | null => {
     const regExp = /(?<=\/)d+$/;
     const match = regExp.exec(url);
     return match && parseInt(match[0], 10);
 };
 
-export const getFiltersFromUrl = (url: string): string[][] | null => {
-    const queryStringRegExp = /(?<=\?).+$/;
-    const queryParamPairsRegExp = /[a-z]+=\w+/g;
+/**
+ * @summary extract the filters from the URL
+ * @param url
+ * @returns {object}
+ */
 
-    const queryString = queryStringRegExp.exec(url);
-    const queryParamPairs =
-        queryString && queryString[0].match(queryParamPairsRegExp);
+export const getFiltersFromUrl = (url: string): object => {
+    const queryString = new URL(url).search;
+    const entries = new URLSearchParams(queryString).entries();
 
-    return queryParamPairs && queryParamPairs.map((pair) => pair.split("="));
+    return Object.fromEntries(entries);
 };
