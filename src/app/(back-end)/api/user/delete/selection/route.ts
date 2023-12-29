@@ -16,11 +16,26 @@ export async function POST(request: NextRequest) {
         deletedCount = await prisma.user.deleteMany({
             where: { id: { in: userIds.ids } }
         });
-        return NextResponse.json(deletedCount, { status: 200 });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error(error);
+        if (error instanceof Error) {
+            switch (error.name) {
+                case "PrismaClientUnknownRequestError": {
+                    return NextResponse.json(
+                        { message: "There is a problem with the resuest" },
+                        { status: 400 }
+                    );
+                }
+                default: {
+                    return NextResponse.json(
+                        { message: "Something went wrong" },
+                        { status: 500 }
+                    );
+                }
+            }
+        }
     } finally {
         await prisma.$disconnect();
     }
-    return NextResponse.json({ status: 200 });
+    return NextResponse.json(deletedCount, { status: 200 });
 }
