@@ -31,7 +31,7 @@ export async function DELETE(request: NextRequest) {
             switch (error.name) {
                 case "PrismaClientKnownRequestError": {
                     return NextResponse.json(
-                        { message: "Record not found" },
+                        { message: error.message.split("\n\n\n")[1] },
                         { status: 404 }
                     );
                 }
