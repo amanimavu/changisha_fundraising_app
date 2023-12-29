@@ -1,4 +1,5 @@
-export const getIdFromUrl = (url: string): number => {
-    const parsedUrl: Array<string> = url.split("/");
-    return parseInt(parsedUrl[parsedUrl.length - 1]);
+export const getIdFromUrl = (url: string): number | null => {
+    const regExp = /(?<=\/)d+$/;
+    const match = regExp.exec(url);
+    return match && parseInt(match[0], 10);
 };
