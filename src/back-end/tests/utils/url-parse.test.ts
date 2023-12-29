@@ -8,6 +8,11 @@ describe("Extract the id from the URL", () => {
         expect(getIdFromUrl(url)).not.toBe("1");
     });
 
+    test("Given a URL with a double digit positive integer as the last path parameter", () => {
+        const url = "http://localhost:3000/users/12";
+        expect(getIdFromUrl(url)).toBe(12);
+    });
+
     test("Given a URL with a float as the last path parameter", () => {
         const url = "http://localhost:3000/users/1.23";
         expect(getIdFromUrl(url)).toBe(null);
