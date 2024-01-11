@@ -18,17 +18,6 @@ datasource db {
 // you can manually rename them in your Prisma schema without touching the database:
 // e.g campaignCategoryBridge field in Campaigns model
 
-model CampaignCategoryBridge {
-  campaignId Int      @map("campaign_id")
-  categoryId Int      @map("category_id")
-  campaigns  Campaign @relation(fields: [campaignId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "campaign_category_bridge_ibfk_1")
-  categories Category @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "campaign_category_bridge_ibfk_2")
-
-  @@id([campaignId, categoryId])
-  @@index([categoryId], map: "category_id")
-  @@map("campaign_category_bridge")
-}
-
 model CampaignType {
   id        Int        @id @default(autoincrement())
   name      String?    @db.VarChar(100)
@@ -41,27 +30,27 @@ model CampaignType {
 }
 
 model Campaign {
-  id                     Int                      @id @default(autoincrement())
-  title                  String                   @db.VarChar(500)
-  description            String?                  @db.Text
-  fundraiserId           Int                      @map("fundraiser_id")
-  startDate              DateTime?                @map("start_date") @db.Date
-  endDate                DateTime?                @map("end_date") @db.Date
-  goal                   Int?
-  fundsRaised            Int?                     @map("funds_raised")
-  status                 CampaignsStatus?
-  campaignImage          String?                  @map("campaign_image") @db.VarChar(800)
-  paybillNumber          Int?                     @map("paybill_number") @db.MediumInt
-  privacySetting         CampaignsPrivacySetting? @map("privacy_setting")
-  verificationStatus     Boolean?                 @map("verification_status")
-  createdAt              DateTime?                @map("created_at") @db.Date
-  updatedAt              DateTime?                @updatedAt @map("updated_at") @db.Date
-  metricId               Int                      @map("metric_id")
-  campaignTypeId         Int                      @map("campaign_type_id")
-  campaignCategoryBridge CampaignCategoryBridge[]
-  campaignTypes          CampaignType             @relation(fields: [campaignTypeId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "campaigns_ibfk_1")
-  metrics                Metric                   @relation(fields: [metricId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "campaigns_ibfk_2")
-  donations              Donation[]
+  id                    Int                      @id @default(autoincrement())
+  title                 String                   @db.VarChar(500)
+  description           String?                  @db.Text
+  fundraiserId          Int                      @map("fundraiser_id")
+  startDate             DateTime?                @map("start_date") @db.Date
+  endDate               DateTime?                @map("end_date") @db.Date
+  goal                  Int?
+  fundsRaised           Int?                     @map("funds_raised")
+  status                CampaignsStatus?
+  campaignImage         String?                  @map("campaign_image") @db.VarChar(800)
+  paybillNumber         Int?                     @map("paybill_number") @db.MediumInt
+  privacySetting        CampaignsPrivacySetting? @map("privacy_setting")
+  verificationStatus    Boolean?                 @map("verification_status")
+  createdAt             DateTime?                @map("created_at") @db.Date
+  updatedAt             DateTime?                @updatedAt @map("updated_at") @db.Date
+  metricId              Int                      @map("metric_id")
+  campaignTypeId        Int                      @map("campaign_type_id")
+  campaignTypes         CampaignType             @relation(fields: [campaignTypeId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "campaigns_ibfk_1")
+  metrics               Metric                   @relation(fields: [metricId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "campaigns_ibfk_2")
+  campaignsToCategories CampaignsToCategories[]
+  donations             Donation[]
 
   @@index([campaignTypeId], map: "campaign_type_id")
   @@index([metricId], map: "metric_id")
@@ -69,11 +58,11 @@ model Campaign {
 }
 
 model Category {
-  id                     Int                      @id @default(autoincrement())
-  name                   String?                  @db.VarChar(100)
-  createdAt              DateTime?                @default(now()) @map("created_at") @db.Timestamp(0)
-  updatedAt              DateTime?                @updatedAt @map("updated_at") @db.Timestamp(0)
-  campaignCategoryBridge CampaignCategoryBridge[]
+  id                    Int                     @id @default(autoincrement())
+  name                  String?                 @db.VarChar(100)
+  createdAt             DateTime?               @default(now()) @map("created_at") @db.Timestamp(0)
+  updatedAt             DateTime?               @updatedAt @map("updated_at") @db.Timestamp(0)
+  campaignsToCategories CampaignsToCategories[]
 
   @@map("categories")
 }
@@ -153,6 +142,17 @@ model Donation {
   @@index([campaignId], map: "campaign_id")
   @@index([donationHistoryId], map: "donation_history_id")
   @@map("donations")
+}
+
+model CampaignsToCategories {
+  campaignId Int      @map("campaign_id")
+  categoryId Int      @map("category_id")
+  campaigns  Campaign @relation(fields: [campaignId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "campaigns_to_categories_ibfk_1")
+  categories Category @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "campaigns_to_categories_ibfk_2")
+
+  @@id([campaignId, categoryId])
+  @@index([categoryId], map: "category_id")
+  @@map("campaigns_to_categories")
 }
 
 enum CampaignsStatus {
