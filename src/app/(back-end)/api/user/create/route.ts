@@ -10,7 +10,7 @@ import prisma from "@/lib/prisma";
  * @summary Create a user
  * @async
  * @param request - HTTP request from the client
- * @returns {Promise<NextResponse>} - Promise of a HTTP response
+ * @returns {Promise<NextResponse<{}>>} - Promise of a HTTP response
  */
 
 export async function POST(request: NextRequest) {
@@ -24,8 +24,6 @@ export async function POST(request: NextRequest) {
         //try out some code
         const requestBody: Prisma.UserCreateInput =
             (await request.json()) as Prisma.UserCreateInput;
-
-        console.log("request body: ", requestBody);
         await prisma.$connect();
         result = await prisma.user.create({
             data: {
