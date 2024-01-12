@@ -17,7 +17,7 @@ export async function PUT(request: NextRequest): Promise<NextResponse> {
     try {
         await prisma.$connect();
         const url = request.url;
-        const _id = getIdFromUrl(url);
+        const _id = getIdFromUrl(url) ?? 0;
         const requestBody: Prisma.UserUpdateInput =
             (await request.json()) as Prisma.UserUpdateInput;
 
