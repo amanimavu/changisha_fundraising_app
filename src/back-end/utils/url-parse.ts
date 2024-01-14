@@ -13,12 +13,16 @@ export const getIdFromUrl = (url: string): number | null => {
 };
 
 /**
+ * Return an empty object if no filters have been provided
+ * Otherwise return all filters, search keywords and sort
+ * value provided
+ *
  * @summary extract the filters from the URL
  * @param url
- * @returns {object}
+ * @returns  {[k: string]: string;}
  */
 
-export const getFiltersFromUrl = (url: string): object => {
+export const getFiltersFromUrl = (url: string) => {
     const queryString = new URL(url).search;
     const entries = new URLSearchParams(queryString).entries();
 
