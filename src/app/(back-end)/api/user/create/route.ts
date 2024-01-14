@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { Prisma } from "@prisma/client";
+import { Prisma, User } from "@prisma/client";
 import prisma from "@/lib/prisma";
 
 /**
@@ -14,7 +14,7 @@ import prisma from "@/lib/prisma";
  */
 
 export async function POST(request: NextRequest) {
-    let result: Prisma.UserCreateInput | object = {};
+    let result: User | object = {};
     try {
         //JSON.parse is used to convert JSON string to a JS object
         //It return a type any

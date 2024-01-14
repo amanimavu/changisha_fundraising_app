@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Prisma } from "@prisma/client";
+import { Prisma, Campaign } from "@prisma/client";
 import prisma from "@/lib/prisma";
 
 /**
@@ -9,7 +9,7 @@ import prisma from "@/lib/prisma";
  * @returns {Promise<NextResponse<{}>>}
  */
 export async function POST(request: NextRequest) {
-    let result: Prisma.CampaignCreateInput | object = {};
+    let result: Campaign | object = {};
     try {
         const requestBody: Prisma.CampaignCreateInput & {
             campaignTypeId?: number;

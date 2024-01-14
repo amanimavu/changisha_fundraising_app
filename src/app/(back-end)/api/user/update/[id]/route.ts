@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Prisma } from "@prisma/client";
+import { Prisma, User } from "@prisma/client";
 import prisma from "@/lib/prisma";
 import { getIdFromUrl } from "@/backend/utils/url-parse";
 
@@ -13,7 +13,7 @@ import { getIdFromUrl } from "@/backend/utils/url-parse";
  */
 
 export async function PUT(request: NextRequest): Promise<NextResponse> {
-    let updatedUser: Prisma.UserUpdateInput | object = {};
+    let updatedUser: User | object = {};
     try {
         await prisma.$connect();
         const url = request.url;
