@@ -18,11 +18,11 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     try {
         await prisma.$connect();
         const url = request.url;
-        const _id = getIdFromUrl(url);
+        const userId = getIdFromUrl(url) ?? 0;
         user =
             (await prisma.user.findUnique({
                 where: {
-                    id: _id
+                    id: userId
                 },
                 include: {
                     donors: true
